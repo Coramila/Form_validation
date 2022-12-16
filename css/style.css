@@ -38,12 +38,4 @@ body {
 	flex-direction: column;
 }
 
-.cartao__titulo{
 
-}
-
-.cadastro-cabecalho__titulo {
-    font-family: var(--fonte-familia-logo);
-    font-size: var(--fonte-tamanho-logo);
-    margin-bottom: 1rem;
-}

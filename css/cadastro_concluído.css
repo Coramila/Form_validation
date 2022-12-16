@@ -1,4 +1,4 @@
-/* .cadastro-cabecalho {
+.cadastro-cabecalho {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -17,9 +17,29 @@
     margin-bottom: 1rem;
 }
 
-.cartao{
-    background-color: var(--cor-contraste-claro);
+.cadastro-cartao {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
 }
+
+.cadastro-cartao__icone-concluido {
+    display: block;
+    width: 3.5rem;
+    height: 3.5rem;
+
+    margin-bottom: 1rem;
+
+    background-image: url(../img/checkmark.svg);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.cadastro-cartao__titulo {
+    max-width: 20rem;
+}
+
 
 @media(min-width: 800px) {
     .cadastro-cabecalho__logo {
@@ -30,4 +50,4 @@
     .cadastro-cabecalho__titulo {
         margin-bottom: 2rem;
     }
-} */
+}
