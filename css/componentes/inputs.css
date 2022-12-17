@@ -10,7 +10,7 @@
 
 .input-container {
     font-weight: var(--fonte-peso-input);
-    position: relative;
+    position:relative;
     margin-bottom: 1rem;
     display: flex;
     flex-direction: column;
