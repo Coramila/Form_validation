@@ -37,24 +37,24 @@ const mensagensDeErro = {
   },
   dataNascimento: {
     valueMissing: "O campo data não pode estar vazio.",
-    customError: "Você deve ser maior que 18 anos para se cadastrar.",
+    customError: "AAAVocê deve ser maior que 18 anos para se cadastrar.",
+  },
+  cpf: {
+    valueMissing: "O campo data não pode estar vazio.",
+    customError: "O CPF digitado não é válido.",
   },
 };
 
 const validadores = {
   dataNascimento: (input) => validaDataNascimento(input),
+  cpf: (input) => validaCPF(input),
 };
 
 function mostraMensagemDeErro(tipoDeInput, input) {
   let mensagem = "";
   tiposDeErro.forEach((erro) => {
     if (input.validity[erro]) {
-      if (erro == "valueMissing") {
-        mensagem = mensagensErro[tipoDeInput]["valueMissing"];
-      }
-      if (mensagem == "") {
-        mensagem = mensagensDeErro[tipoDeInput][erro];
-      }
+      mensagem = mensagensDeErro[tipoDeInput][erro];
     }
   });
 
@@ -63,10 +63,10 @@ function mostraMensagemDeErro(tipoDeInput, input) {
 
 function validaDataNascimento(input) {
   const dataRecebida = new Date(input.value);
-  let mensagem = " ";
+  let mensagem = "";
 
   if (!maiorQue18(dataRecebida)) {
-    mensagem = "Você deve ser maior que 18 anos para se cadastrar.";
+    mensagem = "BBBBVocê deve ser maior que 18 anos para se cadastrar.";
   }
 
   input.setCustomValidity(mensagem);
@@ -80,4 +80,38 @@ function maiorQue18(data) {
     data.getUTCDate()
   );
   return dataMais18 <= dataAtual;
+}
+
+function validaCPF(input) {
+  const cpfFormatado = input.value.replace(/\D/g, "");
+  let mensagem = "";
+
+  if (!checaCPFRepetido(cpfFormatado)) {
+    mensagem = "O CPF digitado não é válido.";
+  }
+
+  input.setCustomValidity(mensagem);
+}
+
+function checaCPFRepetido(cpf) {
+  const valoresRepetidos = [
+    "00000000000",
+    "11111111111",
+    "33333333333",
+    "44444444444",
+    "55555555555",
+    "66666666666",
+    "77777777777",
+    "88888888888",
+    "99999999999",
+  ];
+
+  let cpfValido = true;
+
+  valoresRepetidos.forEach((valor) => {
+    if (valor == cpf) {
+      cpfValido = false;
+    }
+  });
+  return cpfValido;
 }
