@@ -5,7 +5,7 @@ body {
 	background-color: var(--cor-secundaria);
 	color: var(--cor-contraste-escuro);
 	font-family: var(--fonte-familia-corpo);
-	/* overflow-x: hidden;  */
+	background-image: url("../img/bg-intro-desktop.png");
 }
 
 .cartao{
@@ -15,10 +15,6 @@ body {
     box-sizing: border-box;
 	margin-top: 10rem;
 }
-
-/* .input-mensagem-erro{
-    display: none;
-} */
 
 .container { 
 	padding-right: 1rem;
