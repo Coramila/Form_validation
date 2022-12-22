@@ -37,7 +37,7 @@ const mensagensDeErro = {
   },
   dataNascimento: {
     valueMissing: "O campo data não pode estar vazio.",
-    customError: "AAAVocê deve ser maior que 18 anos para se cadastrar.",
+    customError: "Você deve ser maior que 18 anos para se cadastrar.",
   },
   cpf: {
     valueMissing: "O campo data não pode estar vazio.",
@@ -46,6 +46,7 @@ const mensagensDeErro = {
   cep: {
     valueMissing: "O campo CEP não pode estar vazio.",
     patternMismatch: "O CEP digitado não é válido.",
+    customError: "Não foi possível buscar o CEP",
   },
   logradouro: {
     valueMissing: "O campo logradouro não pode estar vazio.",
@@ -80,7 +81,7 @@ function validaDataNascimento(input) {
   let mensagem = "";
 
   if (!maiorQue18(dataRecebida)) {
-    mensagem = "BBBBVocê deve ser maior que 18 anos para se cadastrar.";
+    mensagem = "Você deve ser maior que 18 anos para se cadastrar.";
   }
 
   input.setCustomValidity(mensagem);
@@ -173,7 +174,23 @@ function recuperarCEP(input) {
     fetch(url, options)
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
+        if (data.erro) {
+          input.setCustomValidity("Não foi possível buscar o CEP");
+          return;
+        }
+        input.setCustomValidity("");
+        preencheCamposComCEP(data);
+        return;
       });
   }
+}
+
+function preencheCamposComCEP(data) {
+  const logradouro = document.querySelector('[data-tipo="logradouro"]');
+  const cidade = document.querySelector('[data-tipo="cidade"]');
+  const estado = document.querySelector('[data-tipo="estado"]');
+
+  logradouro.value = data.logradouro;
+  cidade.value = data.localidade;
+  estado.value = data.uf;
 }
